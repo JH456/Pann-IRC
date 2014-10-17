@@ -130,6 +130,18 @@ exports.config = {
 			argsCode: ['s'],
 			m: userData.prof,
 			desc: 'Prints out the given user\'s profile'
+		},
+		{
+			names: ['vigenere', 'encrypt2', 'e2', 'ev'],
+			argsCode: ['s', 'a'],
+			m: crypto.vigenere,
+			desc: 'Encrypts the second argument using vigenre\'s cipher with the first argument as the key.'
+		},
+		{
+			names: ['caesar', 'encrypt', 'e', 'ec'],
+			argsCode: ['n', 'a'],
+			m: crypto.sayCaesar,
+			desc: 'Encrypts the second argument using a caesar cipher using the first argument, a number, as the key.'
 		}
 	]
 };
