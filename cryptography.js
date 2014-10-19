@@ -1,5 +1,22 @@
 exports.decimalToHex = function(data, args) {
-	
+	var digits = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'];
+	var n = (args[0]);
+	var r = '';
+	var mult16 = 1;
+	while (mult16 * 16 <= n) {
+		mult16 *= 16;
+	}
+	while (n > 0) {
+		var count = 0;
+		while (n >= mult16) {
+			n -= mult16;
+			count++;
+		}
+		r += digits[count];
+		mult16 /= 16;
+	}
+	if (r == '') r = '0';
+	data.bot.say(data.channel, '0x' + r);
 }
 
 exports.decimalToBinary = function(data, args) {

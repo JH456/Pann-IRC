@@ -142,6 +142,12 @@ exports.config = {
 			argsCode: ['n', 'a'],
 			m: crypto.sayCaesar,
 			desc: 'Encrypts the second argument using a caesar cipher using the first argument, a number, as the key.'
+		},
+		{
+			names :['hex', 'decimaltohex', 'dtoh'],
+			argsCode: ['n'],
+			m: crypto.decimalToHex,
+			desc: 'Takes a positive, decimal integer and converts it to its hexidecimal equivalent.'
 		}
 	]
 };
