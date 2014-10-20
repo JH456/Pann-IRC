@@ -25,6 +25,8 @@ Pann can store and produce user data.
 Pann can encrypt sentences using a caesar cipher and a specified key.
 ####Vigenere's Cipher
 Pann can encrypt sentences using Vingere's cipher and a specified jey.
+####Hexidecimal conversion
+Can translate decimal numbers into hex.
 
 ###Help
 Pann can produce help messages in case people forget the syntax for a command.
