@@ -149,6 +149,12 @@ exports.config = {
 			m: crypto.decimalToHex,
 			desc: 'Takes a positive, decimal integer and converts it to its hexidecimal equivalent.'
 		}
+		{
+			names: ['hexstring'],
+			argsCode: ['a'],
+			m: crypto.stringToHex,
+			desc: 'Takes a string and converts it to hexidecimal'
+		}
 	]
 };
 

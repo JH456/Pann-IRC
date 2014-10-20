@@ -1,12 +1,12 @@
-exports.decimalToHex = function(data, args) {
+exports.convertToHex = function(number) {
 	var digits = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'];
-	var n = (args[0]);
-	var r = '';
+	var r = number < 0 ? '-' : '';
+	var n = Math.floor(Math.abs(number));
 	var mult16 = 1;
 	while (mult16 * 16 <= n) {
 		mult16 *= 16;
 	}
-	while (n > 0) {
+	while (mult16 >= 1) {
 		var count = 0;
 		while (n >= mult16) {
 			n -= mult16;
@@ -16,14 +16,25 @@ exports.decimalToHex = function(data, args) {
 		mult16 /= 16;
 	}
 	if (r == '') r = '0';
-	data.bot.say(data.channel, '0x' + r);
+	return r;
 }
 
-exports.decimalToBinary = function(data, args) {
-	
+exports.decimalToHex = function(data, args) {
+	data.bot.say(data.channel, '0x' + exports.convertToHex(args[0]));
 }
 
 exports.stringToHex = function(data, args) {
+	var r = '0x';
+	
+	for (var i = 0; i < args[0].length; i++) {
+		if (args[0].charAt(i) == ' ') r += ' 0x';
+		else r += exports.convertToHex(args[0].charCodeAt(i));
+	}
+
+	data.bot.say(data.channel, r);
+}
+
+exports.decimalToBinary = function(data, args) {
 	
 }
 
