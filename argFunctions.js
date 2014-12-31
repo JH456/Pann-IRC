@@ -1,3 +1,9 @@
+/*
+*	Author: Jim Harris
+*	Arguments functions file for PannIRC
+*	Handles arguments exceptions and calling custom functions
+*/
+
 exports.argumentsException = function (data) {
 	data.bot.say(data.channel, '001: Arguments exception. Type *help(commandName) to see the appropriate arguments for a command.');
 }

@@ -1,3 +1,10 @@
+/*
+*	Author: Jim Harris
+*	Miscellaneous module for PannIRC
+*	Miscellaneous user functions
+*/
+
+//Helper for the dance function
 exports.danceHelper = function(data, times, n, speed) {
 	var style;
 	if (times == 1) style = '\\o/';
@@ -7,6 +14,7 @@ exports.danceHelper = function(data, times, n, speed) {
 	if (times > 1) setTimeout(function() {exports.danceHelper(data, times-1, n*-1, speed);}, (1000 / speed));
 }
 
+//Makes a dance pattern
 exports.dance = function(data, args) {
 	var channel = data.channel; var times = args[0]; var speed = args[1];
 	if (speed == 0) {

@@ -1,3 +1,9 @@
+/*
+*	Author: Jim Harris
+*	General module for PannIRC
+*	General functions
+*/
+
 //This lists all of the bot's responses and the words that trigger them. They are sent in the form of a PM to avoid spamming the channel.
 exports.list = function(data, args) {
 	for (var i = 0; i < data.config.responseConfig.length; i++) {
@@ -9,6 +15,7 @@ exports.list = function(data, args) {
 }
 
 //Repeats the given argument.
+//TODO: Make this administrative only
 exports.repeat = function(data, args) {
 	data.bot.say(data.channel, args[0]);
 }

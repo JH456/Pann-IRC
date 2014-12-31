@@ -1,3 +1,9 @@
+/*
+*	Author: Jim Harris
+*	Cryptography module for PannIRC
+*	Module that lets users use basic cryptography
+*/
+
 exports.convertToHex = function(number) {
 	var digits = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'];
 	var r = number < 0 ? '-' : '';
@@ -34,8 +40,24 @@ exports.stringToHex = function(data, args) {
 	data.bot.say(data.channel, r);
 }
 
-exports.decimalToBinary = function(data, args) {
-	
+exports.convertToBinary = function(number) {
+	var r = number < 0 ? '-' : '';
+	var n = Math.floor(Math.abs(number));
+	var mult2 = 1;
+	while (mult2 * 2 <= n) {
+		mult2 *= 2;
+	}
+	while (mult2 >= 1) {
+		var count = 0;
+		while (n >= mult2) {
+			n -= mult2;
+			count++;
+		}
+		r += count;
+		mult2 /= 2;
+	}
+	if (r == '') r = '0';
+	return r;
 }
 
 exports.caesar = function(rot, phrase, oneChar) {
