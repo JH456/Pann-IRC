@@ -45,7 +45,7 @@ exports.prof = function(data, args) {
 		data.bot.say(data.from, '|    ' + props[i] + ': ' + data.userData[args[0]][props[i]]);
 		line = Math.max(line, data.userData[args[0]][props[i]].length + props[i].length);
 	}
-	var linemsg = 'L___';
+	var linemsg = 'L______';
 	for (var i = 0; i < line; i++) linemsg += '_';
 	data.bot.say(data.from, linemsg);
 }
@@ -57,12 +57,12 @@ exports.remove = function(data, args) {
 		return;
 	}
 	if (data.userData[data.from][args[0]] == undefined) {
-		data.bot.say(data.channel, 'You do not have that value saved under your profile...');
+		data.bot.say(data.from, 'You do not have that value saved under your profile...');
 		return;	
 	}
 	delete data.userData[data.from][args[0]];
 	data.fs.writeFileSync('./userData.json', JSON.stringify(data.userData, null, 4));
-	data.bot.say(data.channel, data.channel + '\'s ' + args[0] + ' has been erased.');
+	data.bot.say(data.channel, 'Your ' + args[0] + ' has been erased.');
 }
 
 //Sets an attribute in your profile. Prefixing the name with private_ designates it as private, and only friends can see private_ prefixed attributes

@@ -5,7 +5,7 @@
 */
 
 exports.argumentsException = function (data) {
-	data.bot.say(data.channel, '001: Arguments exception. Type *help(commandName) to see the appropriate arguments for a command.');
+	data.bot.say(data.channel, '001: Arguments exception. Type *help <commandName> to see the appropriate arguments for a command.');
 }
 
 exports.call = function (data, args, command) {

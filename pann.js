@@ -42,8 +42,8 @@ var data = {
 
 //Register nick upon connection to the network
 bot.addListener("registered", function(message) {
-	//replace identify with group Muddy if changing names
-    bot.say("nickserv", 'identify botPassWord');
+	//replace identify with group <bot's original nick> if changing names
+    bot.say("nickserv", 'identify botNickPassword');
 });
 
 //Function that handles message to the bot, or to a channel the bot sits in
@@ -104,13 +104,6 @@ function handleMessage (from, to, text, message, pm) {
 //Create a listener to handle messages to a channel
 bot.addListener("message", function (from, to, text, message) {
 
-	handleMessage(from, to, text, message, false);
-
-});
-
-//Create a listener to handle pms
-bot.addListener("pm", function (from, text, message) {
-
-	handleMessage(from, bot.userName, message.args[1], message, true);
+	handleMessage(from, to, text, message, to === config.config.botName);
 
 });
