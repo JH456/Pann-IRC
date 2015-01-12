@@ -101,7 +101,7 @@ exports.vigenere = function(data, args) {
 		//r += exports.caesar(keyword.charCodeAt(i), plainText.substring(j, j+1), false);
 		if (z == 90 || z == 122) {
 			//var z = keyword.charCodeAt(i) >= 65 && keyword.charCodeAt(i) <= 90 ? 90 : keyword.charCodeAt(i) >= 97 && keyword.charCodeAt(i) <= 122 ? 122 : -1;
-			r += exports.caesar(26-(z-keyword.charCodeAt(i)), plainText.substring(j, j+1), false);
+			r += exports.caesar(26-(z-keyword.charCodeAt(i))-1, plainText.substring(j, j+1), false);
 			i = i >= keyword.length-1 ? 0 : i+1;
 		}
 		else r += plainText.charAt(j);
