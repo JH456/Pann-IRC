@@ -12,42 +12,42 @@ exports.userData = require('./userData.json');
 exports.userDataFunctions = require('./userData.js');
 exports.crypt = require('./cryptography.js');
 exports.argFunctions = require('./argFunctions.js');
-exports.yoToken = 'token for yo API';
+exports.yoToken = 'yo api token here';
 
 exports.config = {
 	botName: "Pann",
 	servers: [
 		{
-			serverName: 'network1',
+			serverName: 'server',
 			channels: [
-				'#channel'
+				'channel'
 			]
 		},
-		{
-			serverName: 'network2',
-			channels: [
-				'#channel'
-			]
-		}
 	],
 	floodProgress: [],
-	responseConfig: [
+	dances: [
 		{
-			triggers: [
-				'affirmative',
-				'of course',
-				'for sure',
-				'fo sho',
-				'fo\' sho\'',
-				'fo show',
-				'fo\' show',
-				'trudat',
-				'trufax',
-				'fo real',
-				'for real'
-			],
-			response: 'yee'
+			steps: ['\\o\\', '/o/'],
+			finale: '\\o/'
 		},
+		{
+			steps: ['vov', '\\o/'],
+			finale: '/o\\'
+		},
+		{
+			steps: ['<o>', '\\o/'],
+			finale: '/o\\'
+		},
+		{
+			steps: ['lol', '\\o\\'],
+			finale: '\\o/'
+		},
+		{
+			steps: ['\\o/', '<o>', '<o-', '/o\\'],
+			finale: '\\o/'
+		}
+	],
+	responseConfig: [
 		{
 			triggers: [
 				':(',

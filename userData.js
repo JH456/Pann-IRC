@@ -4,6 +4,22 @@
 *	The social networking part of the IRC bot
 */
 
+/*exports.identify = function (data, args) {
+
+}
+
+function get (data, args) {
+	if (data.userData[args[0]] == undefined) return undefined;
+	var userVar = data.userData[args[0]];
+	var isPrivate = false;
+	if (userVar.indexOf("_private") == 0) {
+
+	}
+	var field = {
+		data.userData[args[0]]
+	};
+}*/
+
 //Returns a certain user's specified attribute
 exports.get = function(data, args) {
 	if (data.userData[args[0]] == undefined) {

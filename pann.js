@@ -42,8 +42,8 @@ var data = {
 
 //Register nick upon connection to the network
 bot.addListener("registered", function(message) {
-	//replace identify with group <bot's original nick> if changing names
-    bot.say("nickserv", 'identify botNickPassword');
+	//replace identify with group Muddy if changing names
+    bot.say("nickserv", 'identify NotMuddy$p4ssw0rd!fukn0wWh@iMean');
 });
 
 //Function that handles message to the bot, or to a channel the bot sits in

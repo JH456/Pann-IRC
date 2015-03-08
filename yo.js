@@ -14,8 +14,9 @@ function yo(data, args, print) {
 			}
 		},
 		function(error, response, body) {
-			if(body != '{\n  "success": true\n}') data.bot.say(data.channel, 'Error: ' + body);
-			else if (print) data.bot.say(data.channel, 'Sent a yo to ' + args[0] + ' :D');
+			var message = eval('(' + body + ')');
+			if(message.success == undefined) data.bot.say(data.channel, 'Error: ' + message.error + "!");
+			else if (print) data.bot.say(data.channel, 'Sent a yo to ' + args[0] + '!');
 		}
 	);
 }
