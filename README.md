@@ -37,9 +37,11 @@ Pann-IRC is highly extensible. The only limit is yourself. It comes with several
 
 * Step 1) Create a file in the same directory as all the others. For the sake of the example, call it helloWorld.js
 * Step 2) Inside of helloWorld.js, create a function like this:
+
   `exports.helloWorld = function(data, args, info) {
       data.bot.say(info.channel, 'Hello world!')
   }`
+
   * The exports part is neccessary for making the function callable outside the module.
   * The field data is an object for storing general data that a function may need access to. A good example is the bot object.
   * data is also good for storing runtime data that a function may need access to later, such as user login data.
@@ -47,8 +49,11 @@ Pann-IRC is highly extensible. The only limit is yourself. It comes with several
   * info is an object that contains information specific to the calling message from the user in the channel.
   * info contains things such as the channel name and nick of the calling user. See the handleMessage in pann.js for more.
 * Step 3) Add the following line to the top of config.js to declare the module.
+* 
   `var helloWorld = require('./helloWorld.js');`
+
 * Step 4) Go into the commands array of the config object and add the following element at the top:
+
   `{
       names: ['hello'],
       functions: [
@@ -60,6 +65,7 @@ Pann-IRC is highly extensible. The only limit is yourself. It comes with several
       allowedUsers: 'ALL',
       desc: 'Says hello!'
   }`
+
   * Doing this creates a new function that can be called in irc with *hello. Adding additional strings to the names array gives the command aliases. argsCode: 0 specifies that the command takes no arguments. If it takes arguments, it should take arguments in the form of an array, such as argsCode: ['s string', 'n number', 'i integer', 'a sentence']. The first character represents the data type that argFunctions should try to format the argument to you (these are what args are in the function itself), and the words following are a description to be printed out when *help commandName is called. allowedUsers should be set to 'ALL', 'ID' (if only users that identified with NickServ can use this command), or an array of nicks. desc is just a String to be printed when *help commandName is called.
 * Step 5) Go in IRC and try it out! Type in *hello and Pann should shout 'Hello World' at you! For additional examples, see the command definitions for some of the base commands.
 
