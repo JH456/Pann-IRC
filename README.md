@@ -69,7 +69,7 @@ Pann-IRC is highly extensible. The only limit is yourself. It comes with several
       ],
       allowedUsers: 'ALL',
       desc: 'Says hello!'
-  }
+  },
   ```
 
   * Doing this creates a new function that can be called in irc with *hello. Adding additional strings to the names array gives the command aliases. argsCode: 0 specifies that the command takes no arguments. If it takes arguments, it should take arguments in the form of an array, such as argsCode: ['s string', 'n number', 'i integer', 'a sentence']. The first character represents the data type that argFunctions should try to format the argument to you (these are what args are in the function itself), and the words following are a description to be printed out when *help commandName is called. allowedUsers should be set to 'ALL', 'ID' (if only users that identified with NickServ can use this command), or an array of nicks. desc is just a String to be printed when *help commandName is called.
