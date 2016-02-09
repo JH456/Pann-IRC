@@ -1,47 +1,85 @@
-/*
-*	Author: Jim Harris
-*	Arguments functions file for PannIRC
-*	Handles arguments exceptions and calling custom functions
-*/
+/**
+ *	Author: Jim Harris
+ *	Arguments functions file for PannIRC
+ *	Handles arguments exceptions and calling custom functions
+ */
 
-exports.argumentsException = function (data) {
-	data.bot.say(data.channel, '001: Arguments exception. Type *help <commandName> to see the appropriate arguments for a command.');
+function argumentsException (data, info) {
+	data.bot.say(info.channel,
+	'Sorry, but your arguments are wrong...');
 }
 
-exports.call = function (data, args, command) {
-	var argsCode = data.config.commands[command].argsCode;
-	var r = typeof argsCode == 'number' ? new Array(0) : new Array(argsCode.length);
-	if ( !(argsCode == 0 && args.length == 0) && (argsCode.length != args.length) && (argsCode[argsCode.length-1] != 'a') ) {
-		exports.argumentsException(data);
+exports.call = function (data, args, info, command) {
+	var called = false;
+	var functions = data.config.commands[command].functions;
+
+	if (data.config.commands[command].allowedUsers != 'ALL'
+    && data.config.commands[command].allowedUsers != 'ID'
+	&& data.config.commands[command].allowedUsers.indexOf(
+	info.from) == -1) {
+		data.bot.say(info.channel, "Permission denied. T_T");
 		return;
+	} else if (data.config.commands[command].allowedUsers != 'ALL' &&
+        (data.registry == undefined || data.registry[0][info.from] != true)) {
+        data.bot.say(info.channel, "You need to login!");
+        return;
+    }
+
+
+	for (var i = 0; i < functions.length && !called; i++) {
+
+		var argsCode = functions[i].argsCode;
+		// If argscode is just a number rather than an array, make r an array
+		// of length 0, otherwise make it an array of argscode's length
+		var r = typeof argsCode == 'number'
+		    ? new Array(0)
+		    : new Array(argsCode.length);
+
+		if ( (argsCode == 0 && args.length == 0)
+		    || (argsCode.length == args.length)
+		    || (argsCode[argsCode.length-1].charAt(0) == 'a') ) {
+
+		    var invalid = false;
+		    for (var j = 0; j < r.length && !invalid; j++) {
+                if (argsCode[j].length < 1) {
+                    invalid = true;
+                } else if (argsCode[j].charAt(0) == 'n') {
+				    r[j] = parseFloat(args[j]);
+				    if (isNaN(r[j])) {
+					    invalid = true;
+				    }
+			    } else if (argsCode[j].charAt(0) == 'i') {
+				    r[j] = parseInt(args[j]);
+				    if (isNaN(r[j])) {
+					    invalid = true;
+				    }
+			    } else if (argsCode[j].charAt(0) == 'a') {
+				    if (j == argsCode.length-1) {
+					    for (var k = j; k < args.length; k++) {
+						    if (j == k) r[j] = args[k];
+						    else r[j] += ' ' + args[k];
+					    }
+				    } else {
+					    invalid = true;
+				    }
+			    } else if (argsCode[j].charAt(0) == 's') {
+                    r[j] = args[j];
+                } else {
+                    invalid = true;
+                }
+		    }
+
+		    for (var j = 0; j < r.length && !invalid; j++) {
+			    if (r[j] == undefined) {
+				    invalid = true;
+			    }
+		    }
+		    if (!invalid) {
+		        called = true;
+		        functions[i].funcRef(data, r, info);
+            }
+        }
 	}
-	for (var i = 0; i < argsCode.length; i++) {
-		if (argsCode[i] == 'n') {
-			r[i] = parseFloat(args[i]);
-			if (isNaN(r[i])) {
-				exports.argumentsException(data);
-				return;
-			}
-		}
-		else if (argsCode[i] == 'a') {
-			if (i == argsCode.length-1) {
-				for (var j = i; j < args.length; j++) {
-					if (i == j) r[i] = args[j];
-					else r[i] += ' ' + args[j];
-				}
-			}
-			else {
-				exports.argumentsException(data);
-				return;
-			}
-		}
-		else r[i] = args[i];
-	}
-	for (var i = 0; i < r.length; i++) {
-		if (r[i] == undefined) {
-			exports.argumentsException(data);
-			return;
-		}
-	}
-	data.config.commands[command].m(data, r);
+
+	if (!called) argumentsException(data, info);
 }

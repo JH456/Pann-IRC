@@ -25,11 +25,11 @@ exports.convertToHex = function(number) {
 	return r;
 }
 
-exports.decimalToHex = function(data, args) {
-	data.bot.say(data.channel, '0x' + exports.convertToHex(args[0]));
+exports.decimalToHex = function(data, args, info) {
+	data.bot.say(info.channel, '0x' + exports.convertToHex(args[0]));
 }
 
-exports.stringToHex = function(data, args) {
+exports.stringToHex = function(data, args, info) {
 	var r = '0x';
 	
 	for (var i = 0; i < args[0].length; i++) {
@@ -37,7 +37,7 @@ exports.stringToHex = function(data, args) {
 		else r += exports.convertToHex(args[0].charCodeAt(i));
 	}
 
-	data.bot.say(data.channel, r);
+	data.bot.say(info.channel, r);
 }
 
 exports.convertToBinary = function(number) {
@@ -80,11 +80,11 @@ exports.caesar = function(rot, phrase, oneChar) {
 	return r;
 }
 
-exports.sayCaesar = function(data, args) {
-	data.bot.say(data.channel, exports.caesar(args[0], args[1], false));
+exports.sayCaesar = function(data, args, info) {
+	data.bot.say(info.channel, exports.caesar(args[0], args[1], false));
 }
 
-exports.vigenere = function(data, args) {
+exports.vigenere = function(data, args, info) {
 	var keyword = args[0];
 	var plainText = args[1];
 	var r = "";
@@ -94,7 +94,6 @@ exports.vigenere = function(data, args) {
 	var j = 0;
 
 	while (j < plainText.length) {
-		
 		var k = keyword.charCodeAt(i);
 		var z = (k >= 65 && k <= 90) ? 90 : (k >= 97 && k <= 122) ? 122 : k+25;
 		var p = plainText.charCodeAt(j);
@@ -108,5 +107,5 @@ exports.vigenere = function(data, args) {
 		j++;
 	}
 
-	data.bot.say(data.channel, r);
+	data.bot.say(info.channel, r);
 }
